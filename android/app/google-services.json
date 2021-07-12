@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1005784974654",
+    "project_id": "santri-42370",
+    "storage_bucket": "santri-42370.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1005784974654:android:4d1d0e45f1aea8d3e7986f",
+        "android_client_info": {
+          "package_name": "com.example.nilai_santri"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1005784974654-08v6coasm072h24usj3dfucot39sv2lq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nilai_santri",
+            "certificate_hash": "9353e110b8d00e4151f4b5ec0907b81def373844"
+          }
+        },
+        {
+          "client_id": "1005784974654-8eo3jlne64c9kcu0d1hcj6473guuppi1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLdoliT_aAVRDKRDzeqeQnl0vm1QJ2dyw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1005784974654-8eo3jlne64c9kcu0d1hcj6473guuppi1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
