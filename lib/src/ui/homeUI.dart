@@ -61,6 +61,7 @@ class _HomeUIState extends State<HomeUI> {
               child: Icon(Icons.logout_rounded, size: 32),
             ),
             Text("Daftar Santri"),
+            // Memuat halaman tambah data
             InkWell(
               onTap: () => Navigator.push(
                 context,
