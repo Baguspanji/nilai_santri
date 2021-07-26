@@ -49,7 +49,18 @@ class _HomeUIState extends State<HomeUI> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("List Santri"),
+            InkWell(
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => LoginPage()));
+              },
+              child: Icon(Icons.logout_rounded, size: 32),
+            ),
+            Text("Daftar Santri"),
             InkWell(
               onTap: () => Navigator.push(
                 context,
@@ -62,21 +73,23 @@ class _HomeUIState extends State<HomeUI> {
           ],
         ),
       ),
-      body: FirebaseAnimatedList(
-        key: ValueKey<bool>(_anchorToBottom),
-        query: _santriRef,
-        reverse: _anchorToBottom,
-        itemBuilder: (context, snapshot, Animation<double> animation, i) {
-          final item = _items[i];
-          return buildSantri(
-            _size,
-            item.key,
-            item.id_santri,
-            item.nama_santri,
-            item.kelas_santri,
-            item.alamat_santri,
-          );
+      body: RefreshIndicator(
+        onRefresh: () {
+          readData();
         },
+        child: ListView.builder(
+            itemCount: _items.length,
+            itemBuilder: (context, i) {
+              final item = _items[i];
+              return buildSantri(
+                _size,
+                item.key,
+                item.id_santri,
+                item.nama_santri,
+                item.kelas_santri,
+                item.alamat_santri,
+              );
+            }),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.push(
@@ -87,35 +100,6 @@ class _HomeUIState extends State<HomeUI> {
         ),
         child: Icon(Icons.qr_code),
         backgroundColor: Colors.green.shade400,
-      ),
-      drawer: Container(
-        width: _size.width * 0.6,
-        child: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              Container(
-                height: 200,
-                child: const DrawerHeader(
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                  ),
-                ),
-              ),
-              ListTile(
-                title: const Text('Log Out'),
-                onTap: () async {
-                  await FirebaseAuth.instance.signOut();
-
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => LoginPage()));
-                },
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
@@ -174,6 +158,7 @@ class _HomeUIState extends State<HomeUI> {
     // .orderByChild("member/sampai")
     // .startAt(DateTime.now().toString())
     _santriRef.onChildAdded.listen(_onSatri);
+    return;
   }
 
   void _onSatri(Event event) {

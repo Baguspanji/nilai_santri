@@ -35,11 +35,8 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         alignment: Alignment.center,
         child: Text(
-          "Gym Galaxy Pasuruan",
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-          ),
+          "TPQ Roudlotul Qur'an",
+          style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
         ),
       ),
     );

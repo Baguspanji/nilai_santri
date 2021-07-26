@@ -41,11 +41,18 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _onLogin() async {
-    if (username.text != '' || password.text != '') {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: username.text, password: password.text);
-      // _cekSignIn();
+    if (username.text != '' && password.text != '') {
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+                email: username.text, password: password.text);
+        _cekSignIn();
+      } catch (e) {
+        print(e);
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Email atau Password tidak terdaftar!"),
+        ));
+      }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Email atau Password tidak boleh kosong!"),
@@ -62,6 +69,13 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Container(
+              margin: EdgeInsets.only(bottom: 20),
+              child: Text(
+                "TPQ Roudlotul Qur'an",
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+              ),
+            ),
             buildInput(_size, username, 'Email',
                 tipe: TextInputType.emailAddress),
             buildInput(_size, password, 'Password', pass: true),

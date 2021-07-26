@@ -76,7 +76,7 @@ class _EditUIState extends State<EditUI> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Add Santri"),
+            Text("Edit Santri"),
             InkWell(
               onTap: () {},
               child: Icon(Icons.post_add_outlined, size: 32),
