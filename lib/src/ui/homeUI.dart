@@ -49,6 +49,7 @@ class _HomeUIState extends State<HomeUI> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            // LogOut ke halaman login
             InkWell(
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
