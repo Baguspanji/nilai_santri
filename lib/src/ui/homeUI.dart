@@ -95,6 +95,7 @@ class _HomeUIState extends State<HomeUI> {
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(
+            // memuat halaman Scan QR Code
             builder: (context) => QrUI(),
           ),
         ),
@@ -153,10 +154,8 @@ class _HomeUIState extends State<HomeUI> {
 
   void readData() {
     _items.clear();
-
+    // memuat data dari firebase
     _santriRef = database.child("santri");
-    // .orderByChild("member/sampai")
-    // .startAt(DateTime.now().toString())
     _santriRef.onChildAdded.listen(_onSatri);
     return;
   }

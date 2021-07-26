@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1005784974654",
+    "firebase_url": "https://santri-42370-default-rtdb.firebaseio.com",
     "project_id": "santri-42370",
     "storage_bucket": "santri-42370.appspot.com"
   },
@@ -19,6 +20,14 @@
           "android_info": {
             "package_name": "com.example.nilai_santri",
             "certificate_hash": "9353e110b8d00e4151f4b5ec0907b81def373844"
+          }
+        },
+        {
+          "client_id": "1005784974654-u2qk082r88rfe8ukvqstt2bdfvdl9ajl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nilai_santri",
+            "certificate_hash": "d4d3b0dababb7350fe33d668ada1532d3f55ba42"
           }
         },
         {
