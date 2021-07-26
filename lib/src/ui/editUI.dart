@@ -69,7 +69,7 @@ class _EditUIState extends State<EditUI> {
     Size _size = MediaQuery.of(context).size;
     return Scaffold(
       key: _scaffoldKey,
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         backgroundColor: Colors.green[400],

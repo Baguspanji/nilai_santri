@@ -85,15 +85,18 @@ class _RiwayatUIState extends State<RiwayatUI> {
                   itemCount: _nilai.length,
                   itemBuilder: (context, i) {
                     final _item = _nilai[i];
-                    return Container(
-                      padding: EdgeInsets.all(8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          buildContainer(_size, '${_item.tgl}'),
-                          buildContainer(_size, '${_item.kelas}'),
-                          buildContainer(_size, '${_item.ket}'),
-                        ],
+                    return InkWell(
+                      onTap: () => showAlertDialog(context, _item.catatan),
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            buildContainer(_size, '${_item.tgl}'),
+                            buildContainer(_size, '${_item.kelas}'),
+                            buildContainer(_size, '${_item.ket}'),
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -111,6 +114,33 @@ class _RiwayatUIState extends State<RiwayatUI> {
       alignment: Alignment.center,
       width: _size.width * 0.24,
       child: Text(value),
+    );
+  }
+
+  showAlertDialog(BuildContext context, String catatan) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Catatan"),
+      content: Text('${catatan}'),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

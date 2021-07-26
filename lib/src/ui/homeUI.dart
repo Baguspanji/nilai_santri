@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:nilai_santri/src/helper/widgetUI.dart';
 import 'package:nilai_santri/src/model/santriModel.dart';
 import 'package:nilai_santri/src/ui/addUI.dart';
 import 'package:nilai_santri/src/ui/detailUI.dart';
+import 'package:nilai_santri/src/ui/loginUI.dart';
 import 'package:nilai_santri/src/ui/qrUI.dart';
 
 class HomeUI extends StatefulWidget {
@@ -86,6 +88,35 @@ class _HomeUIState extends State<HomeUI> {
         child: Icon(Icons.qr_code),
         backgroundColor: Colors.green.shade400,
       ),
+      drawer: Container(
+        width: _size.width * 0.6,
+        child: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              Container(
+                height: 200,
+                child: const DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                  ),
+                ),
+              ),
+              ListTile(
+                title: const Text('Log Out'),
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => LoginPage()));
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -100,7 +131,7 @@ class _HomeUIState extends State<HomeUI> {
       ),
       child: Container(
         width: _size.width * 0.9,
-        height: _size.height * 0.14,
+        height: _size.height * 0.17,
         padding: EdgeInsets.all(14),
         margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
         decoration: BoxDecoration(

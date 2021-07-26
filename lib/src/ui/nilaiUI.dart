@@ -14,9 +14,11 @@ class NIlaiUI extends StatefulWidget {
 
 class _NIlaiUIState extends State<NIlaiUI> {
   final database = FirebaseDatabase.instance.reference();
+  TextEditingController catatan = TextEditingController();
   List<GetSantri> _items = List();
 
   String nama = '';
+  String kelas = '';
   String uid = '';
   String _dropdownValue = 'Pilih Penilaian';
   String _dropdownKelas = 'Pilih Kelas';
@@ -29,6 +31,7 @@ class _NIlaiUIState extends State<NIlaiUI> {
       for (var item in _items.where((e) => e.id_santri == widget.id)) {
         print(item.id_santri + ':' + item.nama_santri);
         nama = item.nama_santri;
+        kelas = item.kelas_santri;
         uid = item.key;
       }
       setState(() {});
@@ -39,7 +42,8 @@ class _NIlaiUIState extends State<NIlaiUI> {
     var data = {
       'tgl': DateFormat('yyyy-mm-dd').format(now),
       'ket': _dropdownValue,
-      'kelas': _dropdownKelas
+      'kelas': kelas,
+      'catatan': catatan.text
     };
     database
         .child('santri')
@@ -60,6 +64,7 @@ class _NIlaiUIState extends State<NIlaiUI> {
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         backgroundColor: Colors.green[400],
@@ -73,8 +78,9 @@ class _NIlaiUIState extends State<NIlaiUI> {
           children: [
             buildDetail(_size, widget.id),
             buildDetail(_size, nama),
-            buildDropdownKelas(_size),
+            buildDetail(_size, kelas),
             buildDropdown(_size),
+            buildInput(_size, catatan, "Masukkan catatan"),
             Container(
               width: _size.width * 0.6,
               height: 50,
@@ -114,6 +120,37 @@ class _NIlaiUIState extends State<NIlaiUI> {
       child: Text(
         '${value}',
         style: tstyle(22),
+      ),
+    );
+  }
+
+  Container buildInput(
+      Size _size, TextEditingController controller, String placeholder,
+      {TextInputType tipe = TextInputType.text}) {
+    return Container(
+      width: _size.width * 0.8,
+      height: _size.height * 0.1,
+      margin: EdgeInsets.only(top: 10),
+      child: TextField(
+        controller: controller,
+        keyboardType: tipe,
+        decoration: new InputDecoration(
+          border: new OutlineInputBorder(
+            borderRadius: const BorderRadius.all(
+              const Radius.circular(12),
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(
+              const Radius.circular(12),
+            ),
+            borderSide: BorderSide(color: Colors.green.shade400),
+          ),
+          filled: true,
+          hintStyle: new TextStyle(color: Colors.black38),
+          hintText: placeholder,
+          fillColor: Colors.white70,
+        ),
       ),
     );
   }

@@ -42,29 +42,34 @@ class GetNilai {
   String _tgl;
   String _kelas;
   String _ket;
+  String _catatan;
 
   GetNilai(
     this._key,
     this._tgl,
     this._kelas,
     this._ket,
+    this._catatan,
   );
 
   GetNilai.map(dynamic obj) {
     this._tgl = obj['tgl'];
     this._kelas = obj['kelas'];
     this._ket = obj['ket'];
+    this._catatan = obj['_catatan'];
   }
 
   String get key => _key;
   String get tgl => _tgl;
   String get kelas => _kelas;
   String get ket => _ket;
+  String get catatan => _catatan;
 
   GetNilai.fromSnapshot(DataSnapshot snapshot) {
     _key = snapshot.key;
     _tgl = snapshot.value['tgl'];
     _kelas = snapshot.value['kelas'];
     _ket = snapshot.value['ket'];
+    _catatan = snapshot.value['catatan'];
   }
 }

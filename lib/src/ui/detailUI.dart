@@ -73,59 +73,66 @@ class _DetailUIState extends State<DetailUI> {
             buildDetail(_size, nama),
             buildDetail(_size, alamat),
             buildDetail(_size, kelas),
-            Container(
-              width: _size.width * 0.6,
-              height: 50,
-              margin: EdgeInsets.only(top: 20),
-              child: ElevatedButton(
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => NIlaiUI(id: id),
-                  ),
-                ),
-                child: Text(
-                  "Tambah Nilai",
-                  style: tstyle(20, color: Colors.white),
-                ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.green),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                      side: BorderSide(color: Colors.red),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  width: _size.width * 0.4,
+                  height: 60,
+                  margin: EdgeInsets.only(top: 20),
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NIlaiUI(id: id),
+                      ),
+                    ),
+                    child: Text(
+                      "Tambah Nilai",
+                      style: tstyle(20, color: Colors.white),
+                      textAlign: TextAlign.center,
+                    ),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.green),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.red),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
-            Container(
-              width: _size.width * 0.6,
-              height: 50,
-              margin: EdgeInsets.only(top: 20),
-              child: ElevatedButton(
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RiwayatUI(
-                      uid: uid,
+                Container(
+                  width: _size.width * 0.4,
+                  height: 60,
+                  margin: EdgeInsets.only(top: 20),
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => RiwayatUI(
+                          uid: uid,
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      "Riwayat Nilai",
+                      style: tstyle(20, color: Colors.white),
+                      textAlign: TextAlign.center,
+                    ),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.green),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.red),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-                child: Text(
-                  "Riwayat Nilai",
-                  style: tstyle(20, color: Colors.white),
-                ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.green),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                      side: BorderSide(color: Colors.red),
-                    ),
-                  ),
-                ),
-              ),
+              ],
             ),
             Container(
               width: _size.width * 0.6,
