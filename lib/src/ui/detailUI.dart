@@ -97,7 +97,7 @@ class _DetailUIState extends State<DetailUI> {
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.red),
+                          side: BorderSide(color: Colors.black),
                         ),
                       ),
                     ),
@@ -126,7 +126,7 @@ class _DetailUIState extends State<DetailUI> {
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.red),
+                          side: BorderSide(color: Colors.black),
                         ),
                       ),
                     ),
@@ -156,7 +156,7 @@ class _DetailUIState extends State<DetailUI> {
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
-                      side: BorderSide(color: Colors.red),
+                      side: BorderSide(color: Colors.black),
                     ),
                   ),
                 ),

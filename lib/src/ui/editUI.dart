@@ -73,16 +73,7 @@ class _EditUIState extends State<EditUI> {
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         backgroundColor: Colors.green[400],
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("Edit Santri"),
-            InkWell(
-              onTap: () {},
-              child: Icon(Icons.post_add_outlined, size: 32),
-            ),
-          ],
-        ),
+        title: Text("Edit Santri"),
       ),
       body: Container(
         alignment: Alignment.center,
@@ -112,7 +103,7 @@ class _EditUIState extends State<EditUI> {
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
-                      side: BorderSide(color: Colors.red),
+                      side: BorderSide(color: Colors.black),
                     ),
                   ),
                 ),

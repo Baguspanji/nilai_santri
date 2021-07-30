@@ -40,7 +40,7 @@ class _NIlaiUIState extends State<NIlaiUI> {
 
   void _niliaOrder() {
     var data = {
-      'tgl': DateFormat('yyyy-mm-dd').format(now),
+      'tgl': DateFormat('yyyy-MM-dd').format(now),
       'ket': _dropdownValue,
       'kelas': kelas,
       'catatan': catatan.text
@@ -93,7 +93,7 @@ class _NIlaiUIState extends State<NIlaiUI> {
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
-                      side: BorderSide(color: Colors.red),
+                      side: BorderSide(color: Colors.black),
                     ),
                   ),
                 ),
