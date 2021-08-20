@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "1005784974654-dj1daseicslfldfnig0ddukbfcpk37rd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nilai_santri",
+            "certificate_hash": "aa7483f9b2e7c0745f73ef8d9181dfd67a704a4c"
+          }
+        },
+        {
           "client_id": "1005784974654-u2qk082r88rfe8ukvqstt2bdfvdl9ajl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -24,6 +24,9 @@ class _AddUIState extends State<AddUI> {
   TextEditingController idController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController alamatController = TextEditingController();
+  TextEditingController waController = TextEditingController();
+  TextEditingController latController = TextEditingController();
+  TextEditingController longController = TextEditingController();
 
   String _dropdownValue = 'Pilih Kelas';
 
@@ -31,21 +34,29 @@ class _AddUIState extends State<AddUI> {
     if (idController.text != '' ||
         nameController.text != '' ||
         alamatController.text != '' ||
-        _dropdownValue != 'Pilih Kelas') {
-      database.child('santri').push().set({
-        'id_santri': idController.text,
-        'nama_santri': nameController.text,
-        'alamat_santri': alamatController.text,
-        'kelas_santri': _dropdownValue,
-        'nilai_santri': [],
-      }).then((value) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => HomeUI(),
-          ),
-        );
-      });
+        _dropdownValue != 'Pilih Kelas' ||
+        waController.text != '') {
+      if (waController.text[0] != '0') {
+        showInSnackBar("Masukkan nomor dengan benar");
+      } else {
+        database.child('santri').push().set({
+          'id_santri': idController.text,
+          'nama_santri': nameController.text,
+          'alamat_santri': alamatController.text,
+          'kelas_santri': _dropdownValue,
+          'noWa': waController.text,
+          'latitude': latController.text,
+          'longitude': longController.text,
+          'nilai_santri': [],
+        }).then((value) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomeUI(),
+            ),
+          );
+        });
+      }
     } else {
       showInSnackBar("Form tidak boleh kosong!");
     }
@@ -58,55 +69,68 @@ class _AddUIState extends State<AddUI> {
       key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.grey.shade100,
-      appBar: AppBar(
-        backgroundColor: Colors.green[400],
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("Add Santri"),
-            InkWell(
-              onTap: () {},
-              child: Icon(Icons.post_add_outlined, size: 32),
-            ),
-          ],
-        ),
+      appBar: appBar(),
+      body: body(_size),
+    );
+  }
+
+  Widget appBar() {
+    return AppBar(
+      backgroundColor: Colors.green[400],
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text("Add Santri"),
+          InkWell(
+            onTap: () {},
+            child: Icon(Icons.post_add_outlined, size: 32),
+          ),
+        ],
       ),
-      body: Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            SizedBox(height: 20),
-            Text(
-              "Tambah Santri",
-              style: tstyle(30, weight: FontWeight.w500),
-            ),
-            SizedBox(height: 20),
-            buildInput(_size, idController, "Masukkan NIS",
-                tipe: TextInputType.number),
-            buildInput(_size, nameController, "Masukkan Nama"),
-            buildInput(_size, alamatController, "Masukkan Alamat"),
-            buildDropdown(_size),
-            Container(
-              width: _size.width * 0.6,
-              height: 50,
-              margin: EdgeInsets.only(top: 20),
-              child: ElevatedButton(
-                onPressed: () => _addData(),
-                child: Text("Simpan", style: tstyle(20, color: Colors.white)),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.green),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                      side: BorderSide(color: Colors.red),
-                    ),
+    );
+  }
+
+  Widget body(Size _size) {
+    return Container(
+      alignment: Alignment.center,
+      padding: EdgeInsets.all(20),
+      child: Column(
+        children: [
+          SizedBox(height: 20),
+          Text(
+            "Tambah Santri",
+            style: tstyle(30, weight: FontWeight.w500),
+          ),
+          SizedBox(height: 20),
+          buildInput(_size, idController, "Masukkan NIS",
+              tipe: TextInputType.number),
+          buildInput(_size, nameController, "Masukkan Nama"),
+          buildInput(_size, alamatController, "Masukkan Alamat"),
+          buildDropdown(_size),
+          buildInput(_size, waController, "081xxx", tipe: TextInputType.phone),
+          buildInput(_size, latController, "Masukkan Latitude",
+              tipe: TextInputType.phone),
+          buildInput(_size, longController, "Masukkan Longitude",
+              tipe: TextInputType.phone),
+          Container(
+            width: _size.width * 0.6,
+            height: 50,
+            margin: EdgeInsets.only(top: 20),
+            child: ElevatedButton(
+              onPressed: () => _addData(),
+              child: Text("Simpan", style: tstyle(20, color: Colors.white)),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.green),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.black),
                   ),
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

@@ -26,6 +26,9 @@ class _EditUIState extends State<EditUI> {
   TextEditingController idController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController alamatController = TextEditingController();
+  TextEditingController waController = TextEditingController();
+  TextEditingController latController = TextEditingController();
+  TextEditingController longController = TextEditingController();
 
   String _dropdownValue = 'Pilih Kelas';
 
@@ -36,6 +39,9 @@ class _EditUIState extends State<EditUI> {
       nameController.text = item.nama_santri;
       alamatController.text = item.alamat_santri;
       _dropdownValue = item.kelas_santri;
+      waController.text = item.wa;
+      latController.text = item.lat;
+      longController.text = item.long;
       setState(() {});
     });
   }
@@ -45,14 +51,21 @@ class _EditUIState extends State<EditUI> {
         nameController.text != '' ||
         alamatController.text != '' ||
         _dropdownValue != 'Pilih Kelas') {
-      database.child('santri').child(widget.uid).update({
-        'id_santri': idController.text,
-        'nama_santri': nameController.text,
-        'alamat_santri': alamatController.text,
-        'kelas_santri': _dropdownValue,
-      }).then((value) {
-        Navigator.pop(context);
-      });
+      if (waController.text[0] != '0') {
+        showInSnackBar("Masukkan nomor dengan benar");
+      } else {
+        database.child('santri').child(widget.uid).update({
+          'id_santri': idController.text,
+          'nama_santri': nameController.text,
+          'alamat_santri': alamatController.text,
+          'kelas_santri': _dropdownValue,
+          'noWa': waController.text,
+          'latitude': latController.text,
+          'longitude': longController.text,
+        }).then((value) {
+          Navigator.pop(context);
+        });
+      }
     } else {
       showInSnackBar("Form tidak boleh kosong!");
     }
@@ -91,6 +104,12 @@ class _EditUIState extends State<EditUI> {
             buildInput(_size, nameController, "Masukkan Nama"),
             buildInput(_size, alamatController, "Masukkan Alamat"),
             buildDropdown(_size),
+            buildInput(_size, waController, "081xxx",
+                tipe: TextInputType.phone),
+            buildInput(_size, latController, "Masukkan Latitude",
+                tipe: TextInputType.phone),
+            buildInput(_size, longController, "Masukkan Longitude",
+                tipe: TextInputType.phone),
             Container(
               width: _size.width * 0.6,
               height: 50,

@@ -4,8 +4,10 @@ import 'package:nilai_santri/src/helper/widgetUI.dart';
 import 'package:nilai_santri/src/model/santriModel.dart';
 import 'package:nilai_santri/src/ui/editUI.dart';
 import 'package:nilai_santri/src/ui/homeUI.dart';
+import 'package:nilai_santri/src/ui/maps.dart';
 import 'package:nilai_santri/src/ui/nilaiUI.dart';
 import 'package:nilai_santri/src/ui/riwayatUI.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailUI extends StatefulWidget {
   final String id;
@@ -25,6 +27,9 @@ class _DetailUIState extends State<DetailUI> {
   String alamat = '';
   String kelas = '';
   String uid = '';
+  String wa = '';
+  String lat = '';
+  String long = '';
 
   @override
   void initState() {
@@ -48,6 +53,9 @@ class _DetailUIState extends State<DetailUI> {
         nama = item.nama_santri;
         alamat = item.alamat_santri;
         kelas = item.kelas_santri;
+        wa = item.wa;
+        lat = item.lat;
+        long = item.long;
         uid = item.key;
       }
       setState(() {});
@@ -73,12 +81,14 @@ class _DetailUIState extends State<DetailUI> {
             buildDetail(_size, nama),
             buildDetail(_size, alamat),
             buildDetail(_size, kelas),
+            buildWa(_size, wa),
+            buildMaps(_size, 'Lihat Maps'),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
                   width: _size.width * 0.4,
-                  height: 60,
+                  height: 50,
                   margin: EdgeInsets.only(top: 20),
                   child: ElevatedButton(
                     onPressed: () => Navigator.push(
@@ -105,7 +115,7 @@ class _DetailUIState extends State<DetailUI> {
                 ),
                 Container(
                   width: _size.width * 0.4,
-                  height: 60,
+                  height: 50,
                   margin: EdgeInsets.only(top: 20),
                   child: ElevatedButton(
                     onPressed: () => Navigator.push(
@@ -189,7 +199,7 @@ class _DetailUIState extends State<DetailUI> {
     );
   }
 
-  Container buildDetail(Size _size, String value) {
+  Widget buildDetail(Size _size, String value) {
     return Container(
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.only(bottom: 10),
@@ -204,6 +214,66 @@ class _DetailUIState extends State<DetailUI> {
       child: Text(
         '${value}',
         style: tstyle(22),
+      ),
+    );
+  }
+
+  Widget buildWa(Size _size, String value) {
+    String noWa = '62' + value.substring(1);
+    return GestureDetector(
+      onTap: () async {
+        String url = "https://wa.me/$noWa";
+        if (await canLaunch(url)) {
+          await launch(url);
+        } else {
+          throw 'Could not launch $url';
+        }
+      },
+      child: Container(
+        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.only(bottom: 10),
+        alignment: Alignment.centerLeft,
+        width: _size.width * 0.8,
+        height: _size.height * 0.08,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.greenAccent, width: 2),
+        ),
+        child: Text(
+          '${value}',
+          style: tstyle(22),
+        ),
+      ),
+    );
+  }
+
+  Widget buildMaps(Size _size, String value) {
+    return GestureDetector(
+      onTap: () async {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MapsUI(
+                      lat: lat,
+                      long: long,
+                    )));
+      },
+      child: Container(
+        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.only(bottom: 10),
+        alignment: Alignment.centerLeft,
+        width: _size.width * 0.8,
+        height: _size.height * 0.08,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.greenAccent, width: 2),
+        ),
+        child: Text(
+          '${value}',
+          style: tstyle(22),
+        ),
       ),
     );
   }

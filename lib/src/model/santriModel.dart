@@ -6,6 +6,9 @@ class GetSantri {
   String _kelas_santri;
   String _nama_santri;
   String _alamat_santri;
+  String _wa;
+  String _lat;
+  String _long;
 
   GetSantri(
     this._key,
@@ -13,6 +16,9 @@ class GetSantri {
     this._kelas_santri,
     this._nama_santri,
     this._alamat_santri,
+    this._wa,
+    this._lat,
+    this._long,
   );
 
   GetSantri.map(dynamic obj) {
@@ -20,6 +26,9 @@ class GetSantri {
     this._kelas_santri = obj['kelas_santri'];
     this._nama_santri = obj['nama_santri'];
     this._alamat_santri = obj['alamat_santri'];
+    this._wa = obj['noWa'];
+    this._lat = obj['latitude'];
+    this._long = obj['longitude'];
   }
 
   String get key => _key;
@@ -27,6 +36,9 @@ class GetSantri {
   String get kelas_santri => _kelas_santri;
   String get nama_santri => _nama_santri;
   String get alamat_santri => _alamat_santri;
+  String get wa => _wa;
+  String get lat => _lat;
+  String get long => _long;
 
   GetSantri.fromSnapshot(DataSnapshot snapshot) {
     _key = snapshot.key;
@@ -34,6 +46,9 @@ class GetSantri {
     _kelas_santri = snapshot.value['kelas_santri'];
     _nama_santri = snapshot.value['nama_santri'];
     _alamat_santri = snapshot.value['alamat_santri'];
+    _wa = snapshot.value['noWa'];
+    _lat = snapshot.value['latitude'];
+    _long = snapshot.value['longitude'];
   }
 }
 
